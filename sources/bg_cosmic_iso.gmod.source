@@ -1,0 +1,32 @@
+Version               1
+Geometry              ../geometry/EIRSAT.geo.setup
+
+# Physics list
+PhysicsListEM                      Livermore
+PhysicsListEMActivateFluorescence  false
+
+# Output formats
+StoreCalibrated                    true
+StoreScientific                    true  5
+StoreSimulationInfo                init-only
+StoreSimulationInfoIonization      false
+DiscretizeHits                     true
+
+# Run 1:
+
+Run SpaceSim
+SpaceSim.FileName     bg_cosmic.iso.gmod
+SpaceSim.Time         1000
+
+SpaceSim.Source CosmicPhoton
+CosmicPhoton.ParticleType   1
+#CosmicPhoton.Beam           FarFieldAreaSource 0.0 113.4 0.0 360.0
+CosmicPhoton.Beam           FarFieldAreaSource 0.0 180.0 0.0 360.0
+CosmicPhoton.Spectrum       File bg_cosmic.spec
+# Average total flux in ph/cm2/s integrated over the given area 0-113 deg
+# and the given spectrum (data in the file is from 20 keV to 100 MeV): 14.98
+#CosmicPhoton.Flux           14.98
+#Scale flux for full sphere
+CosmicPhoton.Flux           21.44
+
+

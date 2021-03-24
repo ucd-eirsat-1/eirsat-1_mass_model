@@ -1,0 +1,27 @@
+Version               1
+Geometry              ../geometry/EIRSAT.geo.setup
+
+# Physics list
+PhysicsListEM                      Livermore
+PhysicsListEMActivateFluorescence  false
+
+# Output formats
+StoreCalibrated                    true
+StoreScientific                    true  5
+StoreSimulationInfo                init-only
+StoreSimulationInfoIonization      false
+DiscretizeHits                     true
+DefaultRangeCut 0.01
+
+# Run 1:
+
+Run SpaceSim
+SpaceSim.FileName      grb1.iso.gmod
+
+SpaceSim.Time         300000
+
+SpaceSim.Source SingleSource
+SingleSource.ParticleType           1
+SingleSource.Beam					FarFieldAreaSource 0.0 180.0 0.0 360.0
+SingleSource.Spectrum               File grb.spec
+SingleSource.Flux                   1.0

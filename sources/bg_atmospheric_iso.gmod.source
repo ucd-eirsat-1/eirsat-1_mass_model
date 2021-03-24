@@ -1,0 +1,37 @@
+# Beam file for cosima
+
+Version               1
+Geometry              ../geometry/EIRSAT.geo.setup
+
+# Physics list
+PhysicsListEM                      Livermore
+PhysicsListEMActivateFluorescence  false
+
+# Output formats
+StoreCalibrated                    true
+StoreScientific                    true  5
+StoreSimulationInfo                init-only
+StoreSimulationInfoIonization      false
+DiscretizeHits                     true
+
+
+# Run 1:
+
+Run SpaceSim
+SpaceSim.FileName     bg_atmospheric.iso.gmod
+SpaceSim.Time         1000
+
+
+SpaceSim.Source AtmosphericPhoton
+AtmosphericPhoton.ParticleType   1
+#AtmosphericPhoton.Beam           FarFieldAreaSource 113.4 180.0 0.0 360.0
+AtmosphericPhoton.Beam           FarFieldAreaSource 0.0 180.0 0.0 360.0
+AtmosphericPhoton.Spectrum       File bg_atmospheric.spec
+# Average total flux in ph/cm2/s integrated over the given area 113-180 deg
+# and the given spectrum (data in the file is from 20 keV to 100 MeV): 2.77
+#AtmosphericPhoton.Flux           2.77
+#AtmosphericPhoton.Flux           5.
+# Scale flux for full sphere.
+AtmosphericPhoton.Flux           16.58
+
+
