@@ -1,0 +1,23 @@
+Trigger TGMOD
+TGMOD.TriggerByDetector true
+TGMOD.Detector DGMOD 1
+
+Scintillator DGMOD
+
+DGMOD.SensitiveVolume   CeBrCrystal
+DGMOD.DetectorVolume    CeBrCrystal
+DGMOD.NoiseThreshold    15
+DGMOD.TriggerThreshold  30
+
+// Based on interpolated fit to data obtained using EQM array and IDEAS SIPHRA test board with 2 broken channels.
+// Final Detector will be better, but not too important for GRB spectrum.
+DGMOD.EnergyResolution  Gauss     20     20   8.45
+DGMOD.EnergyResolution  Gauss    100    100   9.44
+DGMOD.EnergyResolution  Gauss    350    350  12.10
+DGMOD.EnergyResolution  Gauss    511    511  13.59
+DGMOD.EnergyResolution  Gauss    662    662  14.89
+DGMOD.EnergyResolution  Gauss   1000   1000  17.56
+DGMOD.EnergyResolution  Gauss   5000   5000  41.47
+DGMOD.EnergyResolution  Gauss  10000  10000  66.99
+
+DGMOD.FailureRate 0.0

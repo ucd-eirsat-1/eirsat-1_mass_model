@@ -1,0 +1,224 @@
+Name EIRSAT-1
+Version 1.1
+
+SurroundingSphere 13.5  0.0  0.0  0.0  13.5
+
+Include $(MEGALIB)/resource/examples/geomega/materials/Materials.geo
+Include EIRSAT-1_Materials.geo
+
+Volume WorldVolume             
+WorldVolume.Material Vacuum
+WorldVolume.Visibility 0   
+WorldVolume.Shape BRIK 5000. 5000. 5000.
+WorldVolume.Mother 0
+
+
+//////////////////////////////
+// TCA - 
+// EMOD Thermal Coupon Assembly
+//////////////////////////////
+
+Include TCA.geo
+
+Volume TCA
+TCA.Material Vacuum
+TCA.Visibility 1
+TCA.Virtual True
+TCA.Shape BRIK 5.0 5.0 1.05
+TCA.Position 0.0 0.0 10.3
+TCA.Mother WorldVolume
+
+
+//////////////////////////////
+// Bottom End Cap
+//////////////////////////////
+
+Include BottomEndCap.geo
+
+Volume BottomEndCap
+BottomEndCap.Material Vacuum
+BottomEndCap.Visibility 0
+BottomEndCap.Shape BRIK 5.0 5.0 0.55
+BottomEndCap.Position 0.0 0.0 -10.8
+BottomEndCap.Mother WorldVolume
+
+
+//////////////////////////////
+// Sides
+//////////////////////////////
+
+Include Side.geo
+
+// Y- Side
+SolarArray.Copy YmArray
+YmArray.Position 0.0 -5.09350 0.0
+YmArray.Mother WorldVolume
+
+ShearPanel.Copy YmShear
+YmShear.Position -0.075 -4.925 0.0
+YmShear.Mother WorldVolume
+
+// Y+ Side
+SolarArray.Copy YpArray
+YpArray.Position 0.0 5.09350 0.0
+YpArray.Rotation 0.0 0.0 180.0
+YpArray.Mother WorldVolume
+
+ShearPanel.Copy YpShear
+YpShear.Position 0.075 4.925 0.0
+YpShear.Rotation 0.0 0.0 180.0
+YpShear.Mother WorldVolume
+
+// X- Side
+SolarArray.Copy XmArray
+XmArray.Position -5.09350 0.0 0.0
+XmArray.Rotation 0.0 0.0 270.0
+XmArray.Mother WorldVolume
+
+ShearPanel.Copy XmShear
+XmShear.Position -4.925 0.075 0.0
+XmShear.Rotation 0.0 0.0 270.0
+XmShear.Mother WorldVolume
+
+// X+ Side
+SolarArray.Copy XpArray
+XpArray.Position 5.09350 0.0 0.0
+XpArray.Rotation 0.0 0.0 90.0
+XpArray.Mother WorldVolume
+
+ShearPanel.Copy XpShear
+XpShear.Position 4.925 -0.075 0.0
+XpShear.Rotation 0.0 0.0 90.0
+XpShear.Mother WorldVolume
+
+
+//////////////////////////////
+// Z Magnetorquer
+//////////////////////////////
+
+Include ZMag.geo
+
+Volume ZMag
+ZMag.Material Vacuum
+ZMag.Visibility 0
+ZMag.Shape BRIK 4.85 4.85 1.02
+ZMag.Position 0.0 0.0 -9.23
+ZMag.Mother WorldVolume
+
+
+//////////////////////////////
+// Comms
+//////////////////////////////
+
+Include Comms.geo
+
+Volume Comms
+Comms.Material Vacuum
+Comms.Visibility 0
+Comms.Shape BRIK 4.85 4.85 0.95
+Comms.Position 0.0 0.0 -7.26
+Comms.Mother WorldVolume
+
+
+//////////////////////////////
+// Batt
+//////////////////////////////
+
+Include Batt.geo
+
+Volume Batt
+Batt.Material Vacuum
+Batt.Visibility 0
+Batt.Shape BRIK 4.85 4.85 1.28
+Batt.Position 0.0 0.0 -5.03
+Batt.Mother WorldVolume
+
+
+Include SIR.geo
+
+SIR.Copy SIR0
+SIR0.Position 0.0 0.0 1.03
+SIR0.Mother Batt
+
+
+//////////////////////////////
+// EPS
+//////////////////////////////
+
+Include EPS.geo
+
+Volume EPS
+EPS.Material Vacuum
+EPS.Visibility 0
+EPS.Shape BRIK 4.85 4.85 1.02
+EPS.Position 0.0 0.0 -2.73
+EPS.Mother WorldVolume
+
+
+//////////////////////////////
+// OBC
+//////////////////////////////
+
+Include OBC.geo
+
+Volume OBC
+OBC.Material Vacuum
+OBC.Visibility 0
+OBC.Shape BRIK 4.85 4.85 0.9
+OBC.Position 0.0 0.0 -0.81
+OBC.Mother WorldVolume
+
+
+//////////////////////////////
+// ADCS
+//////////////////////////////
+
+Include ADCS.geo
+
+Volume ADCS
+ADCS.Material Vacuum
+ADCS.Visibility 0
+ADCS.Shape BRIK 4.85 4.85 0.68
+ADCS.Position 0.0 0.0 0.77
+ADCS.Mother WorldVolume
+
+
+//////////////////////////////
+// EMOD
+//////////////////////////////
+
+Include EMOD.geo
+
+Volume EMOD
+EMOD.Material Vacuum
+EMOD.Visibility 0
+EMOD.Virtual False
+EMOD.Shape BRIK 4.85 4.85 0.9
+EMOD.Position 0.0 0.0 2.35
+EMOD.Mother WorldVolume
+
+
+SIR.Copy SIR1
+SIR1.Position 0.0 0.0 0.65
+SIR1.Mother EMOD
+
+
+//////////////////////////////
+// GMOD
+//////////////////////////////
+
+Include GMOD.geo
+Include GMOD.det
+
+Volume GMOD
+GMOD.Material Vacuum
+GMOD.Visibility 1
+GMOD.Virtual True
+GMOD.Shape BRIK 4.85 4.85 3.0
+GMOD.Position 0.0 0.0 6.25
+GMOD.Mother WorldVolume
+
+
+SIR.Copy SIR2
+SIR2.Position 0.0 0.0 2.75
+SIR2.Mother GMOD
